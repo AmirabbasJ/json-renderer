@@ -1,6 +1,7 @@
 import type {
   BoxComponent,
   ColumnsComponent,
+  ImageComponent,
   SectionComponent,
   TextComponent,
 } from './components';
@@ -8,6 +9,7 @@ import type {
 export type Component =
   | BoxComponent
   | ColumnsComponent
+  | ImageComponent
   | SectionComponent
   | TextComponent;
 
