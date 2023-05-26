@@ -6,8 +6,11 @@ interface ResponsiveStyles {
   small: CSSProperties;
 }
 
-export interface Component<T extends string, O extends Record<string, any>> {
+export interface Component<
+  T extends string,
+  O extends Record<string, any> | undefined = undefined,
+> {
   type: T;
-  options: O;
+  options?: O;
   responsiveStyles?: ResponsiveStyles;
 }
