@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-describe('smoke', () => {
+test('smoke', () => {
   it('should pass', () => {
     render(<p>smoke</p>);
 

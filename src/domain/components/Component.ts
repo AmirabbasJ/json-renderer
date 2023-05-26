@@ -8,9 +8,9 @@ interface ResponsiveStyles {
 
 export interface Component<
   T extends string,
-  O extends Record<string, any> | undefined = undefined,
+  O extends Record<string, any> | Record<string, never> = Record<string, never>,
 > {
   type: T;
-  options?: O;
+  options: O;
   responsiveStyles?: ResponsiveStyles;
 }
