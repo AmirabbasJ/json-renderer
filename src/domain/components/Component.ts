@@ -6,8 +6,8 @@ interface ResponsiveStyles {
   small: CSSProperties;
 }
 
-export interface BaseComponent {
-  type: string;
-  options: Record<string, any>;
+export interface Component<T extends string, O extends Record<string, any>> {
+  type: T;
+  options: O;
   responsiveStyles?: ResponsiveStyles;
 }

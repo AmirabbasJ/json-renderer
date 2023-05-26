@@ -1,7 +1,7 @@
-import type { BaseComponent } from './BaseComponent';
+import type { Components } from './components';
 
 export interface Block {
   id: string;
-  component: BaseComponent;
-  children: Block[];
+  component: Components;
+  children?: Block[];
 }
