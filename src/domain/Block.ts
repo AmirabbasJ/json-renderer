@@ -1,7 +1,13 @@
-import type { Components } from './components';
+import type {
+  BoxComponent,
+  SectionComponent,
+  TextComponent,
+} from './components';
+
+export type Component = BoxComponent | SectionComponent | TextComponent;
 
 export interface Block {
   id: string;
-  component: Components;
+  component: Component;
   children?: Block[];
 }

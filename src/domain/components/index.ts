@@ -1,4 +1,3 @@
-import type { BoxComponent } from './BoxComponent';
-import type { SectionComponent } from './SectionComponent';
-
-export type Components = BoxComponent | SectionComponent;
+export * from './BoxComponent';
+export * from './SectionComponent';
+export * from './TextComponent';
