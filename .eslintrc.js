@@ -15,7 +15,15 @@ module.exports = init({
     'import/extensions': [
       'error',
       'always',
-      { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
+      { js: 'never', jsx: 'never', ts: 'never', tsx: 'never', json: 'always' },
     ],
   },
+  overrides: [
+    {
+      files: ['*.test.tsx', '*.test.ts'],
+      rules: {
+        '@typescript-eslint/no-floating-promises': 'off',
+      },
+    },
+  ],
 });

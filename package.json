@@ -7,7 +7,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "vitest run src"
   },
   "dependencies": {
     "react": "18.2.0",
@@ -15,15 +16,19 @@
   },
   "devDependencies": {
     "@fullstacksjs/eslint-config": "9.3.1",
+    "@testing-library/react": "14.0.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@vitejs/plugin-react": "4.0.0",
     "eslint": "8.39.0",
     "husky": "8.0.3",
+    "jsdom": "22.0.0",
     "lint-staged": "13.2.2",
     "prettier": "2.8.8",
     "typescript": "5.0.2",
-    "vite": "4.3.2"
+    "vite": "4.3.2",
+    "vitest": "0.31.1",
+    "vitest-dom": "0.1.0"
   },
   "volta": {
     "node": "19.6.0",

@@ -3,6 +3,7 @@
     "paths": {
       "@/domain": ["./src/domain/index.ts"]
     },
+    "types": ["vitest/globals", "vitest-dom/extend-expect"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
