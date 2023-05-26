@@ -14,14 +14,13 @@ describe('render', () => {
     expect(() => render(testSchema)).not.toThrow();
   });
 
+  const text = 'a simple text';
+  const textBlock: Block = {
+    id: 'text-id',
+    component: { type: 'text', options: { text } },
+  };
+
   describe('Text', () => {
-    const text = 'a simple text';
-
-    const textBlock: Block = {
-      id: 'text-id',
-      component: { type: 'text', options: { text } },
-    };
-
     it('should render text component', () => {
       const els = render({ ...testSchema, blocks: [textBlock] });
 
@@ -35,6 +34,22 @@ describe('render', () => {
         ...testSchema,
         blocks: [textBlock, { ...textBlock, id: 'text-id-2' }],
       });
+
+      domRender(<>{els}</>);
+
+      expect(screen.getAllByText(text)).length(2);
+    });
+  });
+
+  describe('Box', () => {
+    const boxBlock: Block = {
+      id: 'text-id',
+      component: { type: 'box' },
+      children: [textBlock, { ...textBlock, id: 'text-id-2' }],
+    };
+
+    it('should render box component', () => {
+      const els = render({ ...testSchema, blocks: [boxBlock] });
 
       domRender(<>{els}</>);
 

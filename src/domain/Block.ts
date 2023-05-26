@@ -8,12 +8,12 @@ import type {
 } from './components';
 
 export type Component =
-  // | BoxComponent
+  | BoxComponent
   // | ButtonComponent
   // | ColumnsComponent
   // | ImageComponent
   // | SectionComponent
-  TextComponent;
+  | TextComponent;
 
 export interface Block {
   id: string;
