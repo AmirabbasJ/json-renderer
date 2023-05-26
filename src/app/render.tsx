@@ -1,6 +1,5 @@
 import type { Block, Component, Schema } from '@/domain';
-
-import { Text } from '../libs/ui';
+import { Text } from '@/ui';
 
 type ComponentMapping = {
   [K in Component as K['type']]: React.FC<K['options']>;

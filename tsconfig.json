@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/domain": ["./src/domain/index.ts"]
+      "@/domain": ["./src/domain/index.ts"],
+      "@/ui": ["./src/libs/ui/index.ts"]
     },
     "types": ["vitest/globals", "vitest-dom/extend-expect"],
     "allowSyntheticDefaultImports": true,

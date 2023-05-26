@@ -1,6 +1,6 @@
 import type { Component } from './Component';
 
-interface TextOptions {
+export interface TextOptions {
   text: string;
 }
 
