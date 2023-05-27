@@ -4,7 +4,7 @@ type Key = keyof ResponsiveStyles;
 const breakpoints: Record<Key, number> = {
   small: 320,
   medium: 768,
-  large: 100,
+  large: 1200,
 };
 
 export interface ResponsiveProps {

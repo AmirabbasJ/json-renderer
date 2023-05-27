@@ -8,8 +8,6 @@ import { toMediaStyle } from './ResponsiveProps';
 type Props = ResponsiveProps & SectionOptions & { children?: React.ReactNode };
 
 export const Section = ({ maxWidth, children, responsiveStyles }: Props) => {
-  console.log(toMediaStyle(responsiveStyles));
-
   return (
     <section style={{ maxWidth }} css={css(toMediaStyle(responsiveStyles))}>
       {children}
