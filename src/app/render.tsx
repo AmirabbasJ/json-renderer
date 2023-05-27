@@ -1,5 +1,5 @@
 import type { Block, Component, Schema } from '@/domain';
-import { Box, Section, Text } from '@/ui';
+import { Box, Image, Section, Text } from '@/ui';
 
 type ComponentMapping = {
   [K in Component as K['type']]: React.FC<
@@ -13,6 +13,7 @@ const ComponentMapping: ComponentMapping = {
   text: Text,
   box: Box,
   section: Section,
+  image: Image,
 };
 
 const mapBlock = (block: Block): JSX.Element => {

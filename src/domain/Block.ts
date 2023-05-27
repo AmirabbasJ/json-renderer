@@ -13,7 +13,7 @@ export type Component =
   | BoxComponent
   // | ButtonComponent
   // | ColumnsComponent
-  // | ImageComponent
+  | ImageComponent
   | SectionComponent
   | TextComponent;
 interface ResponsiveStyles {

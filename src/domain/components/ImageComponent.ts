@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 
 import type { Component } from './Component';
 
-interface ImageOptions extends CSSProperties {
+export interface ImageOptions extends CSSProperties {
   image: string;
   lazy?: boolean;
   sizes?: string;

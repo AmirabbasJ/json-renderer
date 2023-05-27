@@ -1,6 +1,6 @@
 import { render as domRender, screen } from '@testing-library/react';
 
-import type { Block, Schema } from '../domain';
+import type { Block, ImageComponent, Schema } from '../domain';
 import { render } from './render';
 
 const testSchema: Schema = {
@@ -80,6 +80,44 @@ describe('render', () => {
       expect(container.querySelector('section')).toHaveStyle(
         'max-width: 100px',
       );
+    });
+  });
+
+  describe('Image', () => {
+    const ImageBlock = {
+      id: 'image-id',
+      component: {
+        type: 'image',
+        options: {
+          image:
+            'https://img.freepik.com/free-vector/realistic-neon-lights-background_52683-59889.jpg',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          aspectRatio: 0.7004048582995948,
+          lazy: false,
+          sizes: '(max-width: 638px) 94vw, (max-width: 998px) 96vw, 42vw',
+        },
+      } as ImageComponent,
+      children: [textBlock],
+    };
+
+    it('should render image component with correct src', () => {
+      const els = render({ ...testSchema, blocks: [ImageBlock] });
+
+      const { container } = domRender(<>{els}</>);
+
+      expect(container.querySelector('img')).toHaveAttribute(
+        'src',
+        ImageBlock.component.options.image,
+      );
+    });
+
+    it('should not render children for images', () => {
+      const els = render({ ...testSchema, blocks: [ImageBlock] });
+
+      domRender(<>{els}</>);
+
+      expect(screen.queryByText(text)).toBeNull();
     });
   });
 });

@@ -1,6 +1,6 @@
 import type { Component } from './Component';
 
-interface SectionOptions {
+export interface SectionOptions {
   maxWidth: number;
 }
 
