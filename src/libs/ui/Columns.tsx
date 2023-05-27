@@ -10,9 +10,5 @@ export const Columns = ({
   space,
   stackColumnsAt: _stackColumnsAt,
 }: Props) => {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: space }}>
-      {columns}
-    </div>
-  );
+  return <div style={{ display: 'flex', gap: space }}>{columns}</div>;
 };

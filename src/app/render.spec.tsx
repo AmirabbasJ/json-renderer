@@ -155,9 +155,9 @@ describe('render', () => {
       expect(screen.queryByText(text)).toBeNull();
     });
 
-    it('should render columns component with children when columns is not empty', () => {
+    it('should render columns component with columns', () => {
       const columnsBlockWithCols: Block = {
-        id: 'columns-id-2',
+        id: 'columns-id',
         component: {
           type: 'columns',
           options: {
@@ -179,9 +179,9 @@ describe('render', () => {
       expect(screen.queryAllByText(text)).length(6);
     });
 
-    it('should render columns component with block children when columns is not empty', () => {
+    it('should render columns component columns with box when no component is set on blocks', () => {
       const columnsBlockWithCols: Block = {
-        id: 'columns-id-2',
+        id: 'columns-id',
         component: {
           type: 'columns',
           options: {
@@ -201,10 +201,9 @@ describe('render', () => {
         children: [cText()],
       };
       const els = render({ ...testSchema, blocks: [columnsBlockWithCols] });
+      const { container } = domRender(<>{els}</>);
 
-      domRender(<>{els}</>);
-
-      expect(screen.queryAllByText(text)).length(4);
+      expect(container.querySelectorAll('div > div > p')).length(4);
     });
   });
 

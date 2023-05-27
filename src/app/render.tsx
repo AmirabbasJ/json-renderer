@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 
 import type { Block, Component, Schema } from '@/domain';
+import { BoxComponent } from '@/domain';
 import { Box, Button, Columns, Image, Section, Text } from '@/ui';
 
 type ComponentMapping = {
@@ -30,11 +31,10 @@ const ComponentMapping: ComponentMapping = {
 };
 
 const mapBlock = (block: Block): JSX.Element => {
-  const { children = [], component, id } = block;
+  const { children = [], component = BoxComponent, id } = block;
 
-  const { options = {} } = component ?? {};
-  const Component =
-    component == null ? Fragment : ComponentMapping[component.type];
+  const { options = {} } = component;
+  const Component = ComponentMapping[component.type];
 
   return (
     <Component {...(options as any)} key={id}>
