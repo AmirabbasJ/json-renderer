@@ -12,19 +12,29 @@ type Props = Omit<ColumnsOptions, 'columns'> &
 
 export const Columns = ({
   columns,
-  reverseColumnsWhenStacked,
+  // TODO: I don't know what is the purpose of this prop
+  reverseColumnsWhenStacked: _reverseColumnsWhenStacked,
   space,
-  stackColumnsAt: _stackColumnsAt,
+  stackColumnsAt,
   responsiveStyles,
 }: Props) => {
+  const stackOnTabletStyle = toMediaStyle(
+    stackColumnsAt === 'tablet'
+      ? {
+          medium: {
+            flexDirection: 'row',
+          },
+        }
+      : {},
+  );
+
   return (
     <div
-      css={css(toMediaStyle(responsiveStyles))}
-      style={{
+      css={css(toMediaStyle(responsiveStyles), {
         display: 'flex',
         gap: space,
-        // flexDirection: reverseColumnsWhenStacked ? 'row-reverse' : 'row',
-      }}
+        ...stackOnTabletStyle,
+      })}
     >
       {columns}
     </div>

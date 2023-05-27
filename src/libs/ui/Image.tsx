@@ -15,13 +15,15 @@ export const Image = ({
   ...styles
 }: Props) => {
   return (
-    // eslint-disable-next-line jsx-a11y/alt-text
-    <img
-      css={css(toMediaStyle(responsiveStyles))}
-      src={image}
-      sizes={sizes}
-      loading={lazy ? 'lazy' : 'eager'}
-      style={styles}
-    />
+    <div>
+      <img
+        css={css(toMediaStyle(responsiveStyles))}
+        src={image}
+        alt="test"
+        sizes={sizes}
+        loading={lazy ? 'lazy' : 'eager'}
+        style={styles}
+      />
+    </div>
   );
 };

@@ -1,7 +1,7 @@
 import type { ResponsiveStyles } from '@/domain';
 
 type Key = keyof ResponsiveStyles;
-const breakpoints: Record<Key, number> = {
+export const breakpoints: Record<Key, number> = {
   small: 320,
   medium: 768,
   large: 1200,
