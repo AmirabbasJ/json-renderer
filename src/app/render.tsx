@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 
 import type { Block, Component, Schema } from '@/domain';
@@ -29,12 +30,14 @@ const ComponentMapping: ComponentMapping = {
 };
 
 const mapBlock = (block: Block): JSX.Element => {
-  const { children = [], component } = block;
-  const { options = {}, type } = component;
-  const Component = ComponentMapping[type];
+  const { children = [], component, id } = block;
+
+  const { options = {} } = component ?? {};
+  const Component =
+    component == null ? Fragment : ComponentMapping[component.type];
 
   return (
-    <Component {...(options as any)} key={block.id}>
+    <Component {...(options as any)} key={id}>
       {children.map(b => mapBlock(b))}
     </Component>
   );

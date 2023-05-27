@@ -20,7 +20,7 @@ module.exports = init({
   },
   overrides: [
     {
-      files: ['*.test.tsx', '*.test.ts', '*.spec.tsx', '*.spec.ts'],
+      files: ['*.tsx', '*.ts'],
       rules: {
         'react/jsx-no-useless-fragment': ['warn', { allowExpressions: true }],
         '@typescript-eslint/no-floating-promises': 'off',

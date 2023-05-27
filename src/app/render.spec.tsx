@@ -178,6 +178,34 @@ describe('render', () => {
 
       expect(screen.queryAllByText(text)).length(6);
     });
+
+    it('should render columns component with block children when columns is not empty', () => {
+      const columnsBlockWithCols: Block = {
+        id: 'columns-id-2',
+        component: {
+          type: 'columns',
+          options: {
+            columns: [
+              {
+                blocks: [{ id: 'block-1', children: [cText(), cText()] }],
+              },
+              {
+                blocks: [{ id: 'block-2', children: [cText(), cText()] }],
+              },
+            ],
+            space: 42,
+            stackColumnsAt: 'tablet',
+            reverseColumnsWhenStacked: false,
+          },
+        },
+        children: [cText()],
+      };
+      const els = render({ ...testSchema, blocks: [columnsBlockWithCols] });
+
+      domRender(<>{els}</>);
+
+      expect(screen.queryAllByText(text)).length(4);
+    });
   });
 
   describe('Button', () => {

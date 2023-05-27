@@ -25,7 +25,7 @@ interface ResponsiveStyles {
 
 export interface Block {
   id: string;
-  component: Component;
+  component?: Component;
   children?: Block[];
   responsiveStyles?: ResponsiveStyles;
 }
