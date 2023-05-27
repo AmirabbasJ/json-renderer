@@ -173,9 +173,29 @@ describe('render', () => {
       const els = render({ ...testSchema, blocks: [columnsBlockWithCols] });
 
       domRender(<>{els}</>);
-      screen.debug();
 
       expect(screen.queryAllByText(text)).length(6);
+    });
+  });
+
+  describe('Button', () => {
+    const buttonText = 'a button';
+    const buttonBlock: Block = {
+      id: 'button-id',
+      component: { type: 'button', options: { text: buttonText } },
+      children: [cText()],
+    };
+
+    it('should button component with text', () => {
+      const els = render({ ...testSchema, blocks: [buttonBlock] });
+
+      domRender(<>{els}</>);
+
+      expect(
+        screen.getByRole('button', {
+          name: buttonText,
+        }),
+      ).toBeInTheDocument();
     });
   });
 });

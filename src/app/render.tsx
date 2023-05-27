@@ -1,5 +1,5 @@
 import type { Block, Component, Schema } from '@/domain';
-import { Box, Image, Section, Text } from '@/ui';
+import { Box, Button, Image, Section, Text } from '@/ui';
 
 import { Columns } from '../libs/ui/Columns';
 
@@ -16,6 +16,7 @@ const ComponentMapping: ComponentMapping = {
   box: Box,
   section: Section,
   image: Image,
+  button: Button,
   columns: ({ columns, ...props }) => (
     <Columns
       {...props}

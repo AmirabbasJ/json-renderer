@@ -11,11 +11,12 @@ import type {
 
 export type Component =
   | BoxComponent
-  // | ButtonComponent
+  | ButtonComponent
   | ColumnsComponent
   | ImageComponent
   | SectionComponent
   | TextComponent;
+
 interface ResponsiveStyles {
   large: CSSProperties;
   medium: CSSProperties;

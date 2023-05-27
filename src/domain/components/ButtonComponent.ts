@@ -1,6 +1,6 @@
 import type { Component } from './Component';
 
-interface ButtonOptions {
+export interface ButtonOptions {
   text: string;
 }
 
