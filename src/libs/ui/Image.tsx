@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 import type { ImageOptions } from '@/domain';
 
 import type { ResponsiveProps } from './ResponsiveProps';
@@ -15,7 +17,7 @@ export const Image = ({
   return (
     // eslint-disable-next-line jsx-a11y/alt-text
     <img
-      css={toMediaStyle(responsiveStyles)}
+      css={css(toMediaStyle(responsiveStyles))}
       src={image}
       sizes={sizes}
       loading={lazy ? 'lazy' : 'eager'}

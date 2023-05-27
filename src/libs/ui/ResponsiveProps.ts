@@ -1,5 +1,3 @@
-import { css } from '@emotion/react';
-
 import type { ResponsiveStyles } from '@/domain';
 
 type Key = keyof ResponsiveStyles;
@@ -14,13 +12,12 @@ export interface ResponsiveProps {
 }
 
 export const toMediaStyle = (screens: ResponsiveStyles) => {
-  const styles = Object.entries(screens)
-    .map(([key, style]) => ({
-      [`@media (max-width: 600px)`]: { ...style, color: 'red' },
-    }))
-    .flat();
+  const styles = Object.fromEntries(
+    Object.entries(screens).map(([key, style]) => [
+      `@media (min-width: ${breakpoints[key as Key]}px)`,
+      style,
+    ]),
+  );
 
-  console.log(styles);
-  return css({ ...(screens.large ?? {}) });
-  // return css({ ...styles });
+  return styles;
 };

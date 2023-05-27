@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 import type { SectionOptions } from '@/domain';
 
 import type { ResponsiveProps } from './ResponsiveProps';
@@ -9,7 +11,7 @@ export const Section = ({ maxWidth, children, responsiveStyles }: Props) => {
   console.log(toMediaStyle(responsiveStyles));
 
   return (
-    <section style={{ maxWidth }} css={toMediaStyle(responsiveStyles)}>
+    <section style={{ maxWidth }} css={css(toMediaStyle(responsiveStyles))}>
       {children}
     </section>
   );

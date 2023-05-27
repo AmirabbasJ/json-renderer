@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 import type { ResponsiveProps } from './ResponsiveProps';
 import { toMediaStyle } from './ResponsiveProps';
 
@@ -6,5 +8,5 @@ interface Props extends ResponsiveProps {
 }
 
 export const Box = ({ children, responsiveStyles }: Props) => {
-  return <div css={toMediaStyle(responsiveStyles)}>{children}</div>;
+  return <div css={css(toMediaStyle(responsiveStyles))}>{children}</div>;
 };

@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 import type { ColumnsOptions } from '@/domain';
 
 import type { ResponsiveProps } from './ResponsiveProps';
@@ -10,15 +12,19 @@ type Props = Omit<ColumnsOptions, 'columns'> &
 
 export const Columns = ({
   columns,
-  reverseColumnsWhenStacked: _reverseColumnsWhenStacked,
+  reverseColumnsWhenStacked,
   space,
   stackColumnsAt: _stackColumnsAt,
   responsiveStyles,
 }: Props) => {
   return (
     <div
-      css={toMediaStyle(responsiveStyles)}
-      style={{ display: 'flex', gap: space }}
+      css={css(toMediaStyle(responsiveStyles))}
+      style={{
+        display: 'flex',
+        gap: space,
+        // flexDirection: reverseColumnsWhenStacked ? 'row-reverse' : 'row',
+      }}
     >
       {columns}
     </div>
