@@ -10,4 +10,4 @@ export interface SectionOptions {
   maxWidth: number;
 }
 
-export type SectionComponent = Component<'image', SectionOptions>;
+export type SectionComponent = Component<'section', SectionOptions>;
