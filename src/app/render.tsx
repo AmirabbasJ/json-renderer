@@ -26,6 +26,7 @@ const ComponentMapping: ComponentMapping = {
     <Columns
       {...props}
       columns={columns.flatMap(({ blocks }) =>
+        // NOTE: we're writing a recursive mapper so it's fine for them to call each other
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         blocks.flatMap(n => mapBlock(n)),
       )}
@@ -46,6 +47,8 @@ const mapBlock = (block: Block): JSX.Element => {
 
   return (
     <Component
+      // NOTE: we should not use any as it is a code smell but for this case
+      // TS is not able to figure the type so we're forced to do this
       {...(options as any)}
       responsiveStyles={responsiveStyles}
       key={id}

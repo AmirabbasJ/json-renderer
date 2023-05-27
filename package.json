@@ -8,7 +8,7 @@
     "lint": "eslint . --ext .ts,.tsx --fix",
     "preview": "vite preview",
     "prepare": "husky install",
-    "test": "vitest run src"
+    "test": "vitest"
   },
   "dependencies": {
     "@emotion/react": "11.11.0",
