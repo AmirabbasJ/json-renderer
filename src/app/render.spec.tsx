@@ -13,7 +13,7 @@ const testSchema: Schema = {
 const text = 'a simple text';
 const cText = (): Block => ({
   id: `text-id-${Math.floor(Math.random() * 1000)}`,
-  component: { type: 'text', options: { text } },
+  component: { type: Types.text, options: { text } },
 });
 
 describe('render', () => {
@@ -47,7 +47,7 @@ describe('render', () => {
   describe('Box', () => {
     const boxBlock: Block = {
       id: 'box-id',
-      component: { type: 'box' },
+      component: { type: Types.box },
       children: [cText(), cText()],
     };
 
@@ -63,7 +63,7 @@ describe('render', () => {
   describe('Section', () => {
     const sectionBlock: Block = {
       id: 'section-id',
-      component: { type: 'section', options: { maxWidth: 100 } },
+      component: { type: Types.image, options: { maxWidth: 100 } },
       children: [cText()],
     };
 
@@ -72,7 +72,7 @@ describe('render', () => {
 
       const { container } = domRender(<>{els}</>);
 
-      expect(container.querySelector('section')).toBeInTheDocument();
+      expect(container.querySelector(Types.image)).toBeInTheDocument();
     });
 
     it('should apply maxWidth style for section component', () => {
@@ -80,7 +80,7 @@ describe('render', () => {
 
       const { container } = domRender(<>{els}</>);
 
-      expect(container.querySelector('section')).toHaveStyle(
+      expect(container.querySelector(Types.image)).toHaveStyle(
         'max-width: 100px',
       );
     });
@@ -90,7 +90,7 @@ describe('render', () => {
     const ImageBlock = {
       id: 'image-id',
       component: {
-        type: 'image',
+        type: Types.image,
         options: {
           image:
             'https://img.freepik.com/free-vector/realistic-neon-lights-background_52683-59889.jpg',
@@ -128,7 +128,7 @@ describe('render', () => {
     const columnsBlock: Block = {
       id: 'columns-id',
       component: {
-        type: 'columns',
+        type: Types.columns,
         options: {
           columns: [],
           space: 42,
@@ -159,7 +159,7 @@ describe('render', () => {
       const columnsBlockWithCols: Block = {
         id: 'columns-id',
         component: {
-          type: 'columns',
+          type: Types.columns,
           options: {
             columns: [
               { blocks: [cText(), cText(), cText()] },
@@ -183,7 +183,7 @@ describe('render', () => {
       const columnsBlockWithCols: Block = {
         id: 'columns-id',
         component: {
-          type: 'columns',
+          type: Types.columns,
           options: {
             columns: [
               {
@@ -211,7 +211,7 @@ describe('render', () => {
     const buttonText = 'a button';
     const buttonBlock: Block = {
       id: 'button-id',
-      component: { type: 'button', options: { text: buttonText } },
+      component: { type: Types.button, options: { text: buttonText } },
       children: [cText()],
     };
 
@@ -221,7 +221,7 @@ describe('render', () => {
       domRender(<>{els}</>);
 
       expect(
-        screen.getByRole('button', {
+        screen.getByRole(Types.button, {
           name: buttonText,
         }),
       ).toBeInTheDocument();

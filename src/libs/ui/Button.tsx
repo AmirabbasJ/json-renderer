@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import type { ButtonOptions } from '@/domain';
+import type { TextOptions } from '@/domain';
 
 import type { ResponsiveProps } from './ResponsiveProps';
 import { toMediaStyle } from './ResponsiveProps';

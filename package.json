@@ -15,7 +15,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-helmet": "6.1.0",
-    "react-media": "1.10.0"
+    "react-media": "1.10.0",
+    "zod": "3.21.4"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "11.11.0",

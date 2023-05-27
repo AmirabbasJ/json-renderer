@@ -17,6 +17,7 @@ module.exports = init({
       { js: 'never', jsx: 'never', ts: 'never', tsx: 'never', json: 'always' },
     ],
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
+    'import/no-cycle': 'off',
   },
   overrides: [
     {
