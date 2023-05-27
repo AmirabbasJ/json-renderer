@@ -1,7 +1,10 @@
 import type { TextOptions } from '@/domain';
 
-type Props = TextOptions;
+import type { ResponsiveProps } from './ResponsiveProps';
+import { toMediaStyle } from './ResponsiveProps';
 
-export const Text = ({ text }: Props) => {
-  return <p>{text}</p>;
+type Props = ResponsiveProps & TextOptions;
+
+export const Text = ({ text, responsiveStyles }: Props) => {
+  return <p css={toMediaStyle(responsiveStyles)}>{text}</p>;
 };

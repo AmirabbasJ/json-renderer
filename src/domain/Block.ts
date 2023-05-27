@@ -1,5 +1,3 @@
-import type { CSSProperties } from 'react';
-
 import type {
   BoxComponent,
   ButtonComponent,
@@ -8,6 +6,7 @@ import type {
   SectionComponent,
   TextComponent,
 } from './components';
+import type { ResponsiveStyles } from './ResponsiveStyles';
 
 export type Component =
   | BoxComponent
@@ -16,12 +15,6 @@ export type Component =
   | ImageComponent
   | SectionComponent
   | TextComponent;
-
-interface ResponsiveStyles {
-  large: CSSProperties;
-  medium: CSSProperties;
-  small: CSSProperties;
-}
 
 export interface Block {
   id: string;

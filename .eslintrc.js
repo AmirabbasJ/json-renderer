@@ -2,7 +2,6 @@ const { init } = require('@fullstacksjs/eslint-config/init');
 
 module.exports = init({
   root: true,
-
   modules: {
     auto: true,
     esm: true,
@@ -17,6 +16,7 @@ module.exports = init({
       'always',
       { js: 'never', jsx: 'never', ts: 'never', tsx: 'never', json: 'always' },
     ],
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
   overrides: [
     {

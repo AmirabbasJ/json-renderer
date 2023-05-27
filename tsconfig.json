@@ -4,6 +4,7 @@
       "@/domain": ["./src/domain/index.ts"],
       "@/ui": ["./src/libs/ui/index.ts"]
     },
+    "jsxImportSource": "@emotion/react",
     "types": ["vitest/globals", "vitest-dom/extend-expect"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

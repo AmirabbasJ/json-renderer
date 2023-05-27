@@ -11,11 +11,14 @@
     "test": "vitest run src"
   },
   "dependencies": {
+    "@emotion/react": "11.11.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-helmet": "6.1.0"
+    "react-helmet": "6.1.0",
+    "react-media": "1.10.0"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "11.11.0",
     "@fullstacksjs/eslint-config": "9.3.1",
     "@testing-library/react": "14.0.0",
     "@types/react": "18.0.28",

@@ -1,15 +1,18 @@
-import { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 
 import type { Block, Component, Schema } from '@/domain';
 import { BoxComponent } from '@/domain';
+import type { ResponsiveProps } from '@/ui';
 import { Box, Button, Columns, Image, Section, Text } from '@/ui';
 
 type ComponentMapping = {
   [K in Component as K['type']]: React.FC<
     K['options'] extends undefined
-      ? Record<string, never>
-      : K['options'] & { children?: React.ReactNode }
+      ? ResponsiveProps
+      : K['options'] &
+          ResponsiveProps & {
+            children?: React.ReactNode;
+          }
   >;
 };
 
@@ -31,13 +34,22 @@ const ComponentMapping: ComponentMapping = {
 };
 
 const mapBlock = (block: Block): JSX.Element => {
-  const { children = [], component = BoxComponent, id } = block;
+  const {
+    children = [],
+    component = BoxComponent,
+    id,
+    responsiveStyles = {},
+  } = block;
 
   const { options = {} } = component;
   const Component = ComponentMapping[component.type];
 
   return (
-    <Component {...(options as any)} key={id}>
+    <Component
+      {...(options as any)}
+      responsiveStyles={responsiveStyles}
+      key={id}
+    >
       {children.map(b => mapBlock(b))}
     </Component>
   );

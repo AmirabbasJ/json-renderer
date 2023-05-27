@@ -1,11 +1,21 @@
 import type { ImageOptions } from '@/domain';
 
-type Props = ImageOptions;
+import type { ResponsiveProps } from './ResponsiveProps';
+import { toMediaStyle } from './ResponsiveProps';
 
-export const Image = ({ image, lazy, sizes, ...styles }: Props) => {
+type Props = ImageOptions & ResponsiveProps;
+
+export const Image = ({
+  image,
+  lazy,
+  sizes,
+  responsiveStyles,
+  ...styles
+}: Props) => {
   return (
     // eslint-disable-next-line jsx-a11y/alt-text
     <img
+      css={toMediaStyle(responsiveStyles)}
       src={image}
       sizes={sizes}
       loading={lazy ? 'lazy' : 'eager'}

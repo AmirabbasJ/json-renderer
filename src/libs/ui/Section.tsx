@@ -1,7 +1,16 @@
 import type { SectionOptions } from '@/domain';
 
-type Props = SectionOptions & { children?: React.ReactNode };
+import type { ResponsiveProps } from './ResponsiveProps';
+import { toMediaStyle } from './ResponsiveProps';
 
-export const Section = ({ maxWidth, children }: Props) => {
-  return <section style={{ maxWidth }}>{children}</section>;
+type Props = ResponsiveProps & SectionOptions & { children?: React.ReactNode };
+
+export const Section = ({ maxWidth, children, responsiveStyles }: Props) => {
+  console.log(toMediaStyle(responsiveStyles));
+
+  return (
+    <section style={{ maxWidth }} css={toMediaStyle(responsiveStyles)}>
+      {children}
+    </section>
+  );
 };

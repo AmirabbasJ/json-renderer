@@ -1,7 +1,10 @@
 import type { ButtonOptions } from '@/domain';
 
-type Props = ButtonOptions;
+import type { ResponsiveProps } from './ResponsiveProps';
+import { toMediaStyle } from './ResponsiveProps';
 
-export const Button = ({ text }: Props) => {
-  return <button>{text}</button>;
+type Props = ButtonOptions & ResponsiveProps;
+
+export const Button = ({ text, responsiveStyles }: Props) => {
+  return <button css={toMediaStyle(responsiveStyles)}>{text}</button>;
 };
