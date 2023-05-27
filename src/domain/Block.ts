@@ -12,7 +12,7 @@ import type {
 export type Component =
   | BoxComponent
   // | ButtonComponent
-  // | ColumnsComponent
+  | ColumnsComponent
   | ImageComponent
   | SectionComponent
   | TextComponent;

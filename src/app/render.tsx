@@ -1,6 +1,8 @@
 import type { Block, Component, Schema } from '@/domain';
 import { Box, Image, Section, Text } from '@/ui';
 
+import { Columns } from '../libs/ui/Columns';
+
 type ComponentMapping = {
   [K in Component as K['type']]: React.FC<
     K['options'] extends undefined
@@ -14,13 +16,22 @@ const ComponentMapping: ComponentMapping = {
   box: Box,
   section: Section,
   image: Image,
+  columns: ({ columns, ...props }) => (
+    <Columns
+      {...props}
+      columns={columns.flatMap(({ blocks }) =>
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        blocks.flatMap(n => mapBlock(n)),
+      )}
+    />
+  ),
 };
 
 const mapBlock = (block: Block): JSX.Element => {
   const { children = [], component } = block;
   const { options = {}, type } = component;
-
   const Component = ComponentMapping[type];
+
   return (
     <Component {...(options as any)} key={block.id}>
       {children.map(b => mapBlock(b))}

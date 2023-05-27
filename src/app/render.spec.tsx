@@ -9,20 +9,21 @@ const testSchema: Schema = {
   url: '/',
 };
 
+// TODO: add a stub generator to generate these
+const text = 'a simple text';
+const cText = (): Block => ({
+  id: `text-id-${Math.floor(Math.random() * 1000)}`,
+  component: { type: 'text', options: { text } },
+});
+
 describe('render', () => {
   it('should render empty schema', () => {
     expect(() => render(testSchema)).not.toThrow();
   });
 
-  const text = 'a simple text';
-  const textBlock: Block = {
-    id: 'text-id',
-    component: { type: 'text', options: { text } },
-  };
-
   describe('Text', () => {
     it('should render text component', () => {
-      const els = render({ ...testSchema, blocks: [textBlock] });
+      const els = render({ ...testSchema, blocks: [cText()] });
 
       domRender(<>{els}</>);
 
@@ -32,7 +33,7 @@ describe('render', () => {
     it('should render multiple text components', () => {
       const els = render({
         ...testSchema,
-        blocks: [textBlock, { ...textBlock, id: 'text-id-2' }],
+        blocks: [cText(), cText()],
       });
 
       domRender(<>{els}</>);
@@ -45,7 +46,7 @@ describe('render', () => {
     const boxBlock: Block = {
       id: 'box-id',
       component: { type: 'box' },
-      children: [textBlock, { ...textBlock, id: 'text-id-2' }],
+      children: [cText(), cText()],
     };
 
     it('should render box component', () => {
@@ -61,7 +62,7 @@ describe('render', () => {
     const sectionBlock: Block = {
       id: 'section-id',
       component: { type: 'section', options: { maxWidth: 100 } },
-      children: [textBlock],
+      children: [cText()],
     };
 
     it('should render section component', () => {
@@ -98,7 +99,7 @@ describe('render', () => {
           sizes: '(max-width: 638px) 94vw, (max-width: 998px) 96vw, 42vw',
         },
       } as ImageComponent,
-      children: [textBlock],
+      children: [cText()],
     };
 
     it('should render image component with correct src', () => {
@@ -118,6 +119,63 @@ describe('render', () => {
       domRender(<>{els}</>);
 
       expect(screen.queryByText(text)).toBeNull();
+    });
+  });
+
+  describe('Columns', () => {
+    const columnsBlock: Block = {
+      id: 'columns-id',
+      component: {
+        type: 'columns',
+        options: {
+          columns: [],
+          space: 42,
+          stackColumnsAt: 'tablet',
+          reverseColumnsWhenStacked: false,
+        },
+      },
+      children: [cText()],
+    };
+
+    it('should render columns component', () => {
+      const els = render({ ...testSchema, blocks: [columnsBlock] });
+
+      const { container } = domRender(<>{els}</>);
+
+      expect(container.querySelector('div')).toBeInTheDocument();
+    });
+
+    it('should render columns component without children', () => {
+      const els = render({ ...testSchema, blocks: [columnsBlock] });
+
+      domRender(<>{els}</>);
+
+      expect(screen.queryByText(text)).toBeNull();
+    });
+
+    it('should render columns component with children when columns is not empty', () => {
+      const columnsBlockWithCols: Block = {
+        id: 'columns-id-2',
+        component: {
+          type: 'columns',
+          options: {
+            columns: [
+              { blocks: [cText(), cText(), cText()] },
+              { blocks: [cText(), cText(), cText()] },
+            ],
+            space: 42,
+            stackColumnsAt: 'tablet',
+            reverseColumnsWhenStacked: false,
+          },
+        },
+        children: [cText()],
+      };
+      const els = render({ ...testSchema, blocks: [columnsBlockWithCols] });
+
+      domRender(<>{els}</>);
+      screen.debug();
+
+      expect(screen.queryAllByText(text)).length(6);
     });
   });
 });

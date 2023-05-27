@@ -5,8 +5,11 @@ interface Column {
   blocks: Block[];
 }
 
-interface ColumnsOptions {
+export interface ColumnsOptions {
   columns: Column[];
+  space: number;
+  stackColumnsAt: string;
+  reverseColumnsWhenStacked: boolean;
 }
 
 export type ColumnsComponent = Component<'columns', ColumnsOptions>;
