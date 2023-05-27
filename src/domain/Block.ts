@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 import type {
   BoxComponent,
   ButtonComponent,
@@ -14,9 +16,15 @@ export type Component =
   // | ImageComponent
   // | SectionComponent
   | TextComponent;
+interface ResponsiveStyles {
+  large: CSSProperties;
+  medium: CSSProperties;
+  small: CSSProperties;
+}
 
 export interface Block {
   id: string;
   component: Component;
   children?: Block[];
+  responsiveStyles?: ResponsiveStyles;
 }
