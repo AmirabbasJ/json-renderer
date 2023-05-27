@@ -43,7 +43,7 @@ describe('render', () => {
 
   describe('Box', () => {
     const boxBlock: Block = {
-      id: 'text-id',
+      id: 'box-id',
       component: { type: 'box' },
       children: [textBlock, { ...textBlock, id: 'text-id-2' }],
     };
@@ -54,6 +54,32 @@ describe('render', () => {
       domRender(<>{els}</>);
 
       expect(screen.getAllByText(text)).length(2);
+    });
+  });
+
+  describe('Section', () => {
+    const sectionBlock: Block = {
+      id: 'section-id',
+      component: { type: 'section', options: { maxWidth: 100 } },
+      children: [textBlock],
+    };
+
+    it('should render section component', () => {
+      const els = render({ ...testSchema, blocks: [sectionBlock] });
+
+      const { container } = domRender(<>{els}</>);
+
+      expect(container.querySelector('section')).toBeInTheDocument();
+    });
+
+    it('should apply maxWidth style for section component', () => {
+      const els = render({ ...testSchema, blocks: [sectionBlock] });
+
+      const { container } = domRender(<>{els}</>);
+
+      expect(container.querySelector('section')).toHaveStyle(
+        'max-width: 100px',
+      );
     });
   });
 });

@@ -14,7 +14,7 @@ export type Component =
   // | ButtonComponent
   // | ColumnsComponent
   // | ImageComponent
-  // | SectionComponent
+  | SectionComponent
   | TextComponent;
 interface ResponsiveStyles {
   large: CSSProperties;

@@ -1,7 +1,5 @@
-import React from 'react';
-
 import type { Block, Component, Schema } from '@/domain';
-import { Box, Text } from '@/ui';
+import { Box, Section, Text } from '@/ui';
 
 type ComponentMapping = {
   [K in Component as K['type']]: React.FC<
@@ -14,14 +12,17 @@ type ComponentMapping = {
 const ComponentMapping: ComponentMapping = {
   text: Text,
   box: Box,
+  section: Section,
 };
 
 const mapBlock = (block: Block): JSX.Element => {
-  const { options = {}, type } = block.component;
+  const { children = [], component } = block;
+  const { options = {}, type } = component;
+
   const Component = ComponentMapping[type];
   return (
     <Component {...(options as any)} key={block.id}>
-      {block.children?.map(b => mapBlock(b))}
+      {children.map(b => mapBlock(b))}
     </Component>
   );
 };
