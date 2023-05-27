@@ -1,4 +1,4 @@
-import { render as domRender, screen } from '@testing-library/react';
+import { render as domRender, screen, waitFor } from '@testing-library/react';
 
 import type { Block, ImageComponent, Schema } from '../domain';
 import { render } from './render';
@@ -17,8 +17,10 @@ const cText = (): Block => ({
 });
 
 describe('render', () => {
-  it('should render empty schema', () => {
-    expect(() => render(testSchema)).not.toThrow();
+  it('should change the default title', async () => {
+    domRender(render(testSchema));
+
+    await waitFor(() => expect(document.title).toEqual(testSchema.title));
   });
 
   describe('Text', () => {

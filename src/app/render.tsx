@@ -1,7 +1,7 @@
-import type { Block, Component, Schema } from '@/domain';
-import { Box, Button, Image, Section, Text } from '@/ui';
+import { Helmet } from 'react-helmet';
 
-import { Columns } from '../libs/ui/Columns';
+import type { Block, Component, Schema } from '@/domain';
+import { Box, Button, Columns, Image, Section, Text } from '@/ui';
 
 type ComponentMapping = {
   [K in Component as K['type']]: React.FC<
@@ -40,6 +40,13 @@ const mapBlock = (block: Block): JSX.Element => {
   );
 };
 
-export const render = (schema: Schema): JSX.Element[] => {
-  return schema.blocks.map(b => mapBlock(b));
+export const render = (schema: Schema): JSX.Element => {
+  return (
+    <>
+      <Helmet>
+        <title>{schema.title}</title>
+      </Helmet>
+      {schema.blocks.map(b => mapBlock(b))}
+    </>
+  );
 };
