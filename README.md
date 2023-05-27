@@ -12,7 +12,7 @@
 first clone the repo and then head to the [scripts](#scripts) section
 
 ```bash
-git clone git@github.com:AmirabbasJ/json-renderer.git
+git clone https://github.com/AmirabbasJ/json-renderer.git
 ```
 
 ## Scripts
