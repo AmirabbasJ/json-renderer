@@ -2,7 +2,8 @@
   "compilerOptions": {
     "paths": {
       "@/domain": ["./src/domain/index.ts"],
-      "@/ui": ["./src/libs/ui/index.ts"]
+      "@/ui": ["./src/libs/ui/index.ts"],
+      "@/test-utils": ["./src/libs/test-utils/index.ts"]
     },
     "jsxImportSource": "@emotion/react",
     "types": ["vitest/globals", "vitest-dom/extend-expect"],

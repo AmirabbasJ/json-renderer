@@ -58,7 +58,11 @@ const mapBlock = (block: Block): JSX.Element => {
   );
 };
 
-export const render = (schema: Schema): JSX.Element => {
+interface Props {
+  schema: Schema;
+}
+
+export const JsonRenderer = ({ schema }: Props) => {
   return (
     <>
       <Helmet>

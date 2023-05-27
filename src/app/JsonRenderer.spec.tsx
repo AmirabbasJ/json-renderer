@@ -1,7 +1,10 @@
-import { render as domRender, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 
-import type { Block, ImageComponent, Schema } from '../domain';
-import { render } from './render';
+import type { Block, ImageComponent, Schema } from '@/domain';
+import { Types } from '@/domain';
+import { render } from '@/test-utils';
+
+import { JsonRenderer } from './JsonRenderer';
 
 const testSchema: Schema = {
   title: 'test',
@@ -18,27 +21,26 @@ const cText = (): Block => ({
 
 describe('render', () => {
   it('should change the default title', async () => {
-    domRender(render(testSchema));
-
+    render(<JsonRenderer schema={testSchema} />);
     await waitFor(() => expect(document.title).toEqual(testSchema.title));
   });
 
   describe('Text', () => {
     it('should render text component', () => {
-      const els = render({ ...testSchema, blocks: [cText()] });
-
-      domRender(<>{els}</>);
+      render(<JsonRenderer schema={{ ...testSchema, blocks: [cText()] }} />);
 
       expect(screen.getByText(text)).toBeInTheDocument();
     });
 
     it('should render multiple text components', () => {
-      const els = render({
-        ...testSchema,
-        blocks: [cText(), cText()],
-      });
-
-      domRender(<>{els}</>);
+      render(
+        <JsonRenderer
+          schema={{
+            ...testSchema,
+            blocks: [cText(), cText()],
+          }}
+        />,
+      );
 
       expect(screen.getAllByText(text)).length(2);
     });
@@ -52,9 +54,7 @@ describe('render', () => {
     };
 
     it('should render box component', () => {
-      const els = render({ ...testSchema, blocks: [boxBlock] });
-
-      domRender(<>{els}</>);
+      render(<JsonRenderer schema={{ ...testSchema, blocks: [boxBlock] }} />);
 
       expect(screen.getAllByText(text)).length(2);
     });
@@ -63,24 +63,24 @@ describe('render', () => {
   describe('Section', () => {
     const sectionBlock: Block = {
       id: 'section-id',
-      component: { type: Types.image, options: { maxWidth: 100 } },
+      component: { type: Types.section, options: { maxWidth: 100 } },
       children: [cText()],
     };
 
     it('should render section component', () => {
-      const els = render({ ...testSchema, blocks: [sectionBlock] });
+      const { container } = render(
+        <JsonRenderer schema={{ ...testSchema, blocks: [sectionBlock] }} />,
+      );
 
-      const { container } = domRender(<>{els}</>);
-
-      expect(container.querySelector(Types.image)).toBeInTheDocument();
+      expect(container.querySelector(Types.section)).toBeInTheDocument();
     });
 
     it('should apply maxWidth style for section component', () => {
-      const els = render({ ...testSchema, blocks: [sectionBlock] });
+      const { container } = render(
+        <JsonRenderer schema={{ ...testSchema, blocks: [sectionBlock] }} />,
+      );
 
-      const { container } = domRender(<>{els}</>);
-
-      expect(container.querySelector(Types.image)).toHaveStyle(
+      expect(container.querySelector(Types.section)).toHaveStyle(
         'max-width: 100px',
       );
     });
@@ -105,9 +105,9 @@ describe('render', () => {
     };
 
     it('should render image component with correct src', () => {
-      const els = render({ ...testSchema, blocks: [ImageBlock] });
-
-      const { container } = domRender(<>{els}</>);
+      const { container } = render(
+        <JsonRenderer schema={{ ...testSchema, blocks: [ImageBlock] }} />,
+      );
 
       expect(container.querySelector('img')).toHaveAttribute(
         'src',
@@ -116,9 +116,7 @@ describe('render', () => {
     });
 
     it('should not render children for images', () => {
-      const els = render({ ...testSchema, blocks: [ImageBlock] });
-
-      domRender(<>{els}</>);
+      render(<JsonRenderer schema={{ ...testSchema, blocks: [ImageBlock] }} />);
 
       expect(screen.queryByText(text)).toBeNull();
     });
@@ -140,17 +138,17 @@ describe('render', () => {
     };
 
     it('should render columns component', () => {
-      const els = render({ ...testSchema, blocks: [columnsBlock] });
-
-      const { container } = domRender(<>{els}</>);
+      const { container } = render(
+        <JsonRenderer schema={{ ...testSchema, blocks: [columnsBlock] }} />,
+      );
 
       expect(container.querySelector('div')).toBeInTheDocument();
     });
 
     it('should render columns component without children', () => {
-      const els = render({ ...testSchema, blocks: [columnsBlock] });
-
-      domRender(<>{els}</>);
+      render(
+        <JsonRenderer schema={{ ...testSchema, blocks: [columnsBlock] }} />,
+      );
 
       expect(screen.queryByText(text)).toBeNull();
     });
@@ -172,9 +170,12 @@ describe('render', () => {
         },
         children: [cText()],
       };
-      const els = render({ ...testSchema, blocks: [columnsBlockWithCols] });
 
-      domRender(<>{els}</>);
+      render(
+        <JsonRenderer
+          schema={{ ...testSchema, blocks: [columnsBlockWithCols] }}
+        />,
+      );
 
       expect(screen.queryAllByText(text)).length(6);
     });
@@ -200,8 +201,12 @@ describe('render', () => {
         },
         children: [cText()],
       };
-      const els = render({ ...testSchema, blocks: [columnsBlockWithCols] });
-      const { container } = domRender(<>{els}</>);
+
+      const { container } = render(
+        <JsonRenderer
+          schema={{ ...testSchema, blocks: [columnsBlockWithCols] }}
+        />,
+      );
 
       expect(container.querySelectorAll('div > div > p')).length(4);
     });
@@ -216,9 +221,9 @@ describe('render', () => {
     };
 
     it('should button component with text', () => {
-      const els = render({ ...testSchema, blocks: [buttonBlock] });
-
-      domRender(<>{els}</>);
+      render(
+        <JsonRenderer schema={{ ...testSchema, blocks: [buttonBlock] }} />,
+      );
 
       expect(
         screen.getByRole(Types.button, {
